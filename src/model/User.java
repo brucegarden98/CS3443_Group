@@ -153,9 +153,26 @@ public class User {
 				userName = userUserName;
 				return "true";
 			}else
-				matchReturn =  "Username not exist!";
+				matchReturn =  "Username does not exist!";
 		}
 		return matchReturn;
+	}
+	
+	/**
+	 * @param tempUserName: String
+	 * This method return the user match by string passed to this method.
+	 */
+	public User matchUser(String tempUserName) {
+		User tempUser = null;
+		for(int i=0;i<loginUser.size();i++) {
+			if(loginUser.get(i).getUserName().equalsIgnoreCase(tempUserName))
+				tempUser = loginUser.get(i);
+		}
+		return tempUser;
+	}
+	
+	public void addUser(User tempUser) {
+		loginUser.add(tempUser);
 	}
 
 	/*

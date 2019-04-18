@@ -1,10 +1,10 @@
 package controller;
 
+import model.User;
+import application.Main;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import model.User;
 import javafx.fxml.Initializable;
 
 /**
@@ -34,7 +33,7 @@ public class LoginController implements Initializable{
 	@FXML
 	private Text feedback_Login;
 	User tempUser = new User("","","","","");
-	protected static String userName;
+	public static User currentUser;
 	
 	/**
 	 * initialize method that handle all data before GUI appear
@@ -50,14 +49,17 @@ public class LoginController implements Initializable{
 
     /**
 	 * handleIdentity method that handle all user action
+     * @throws InterruptedException 
 	 */
-    public void handleLogin(ActionEvent event) throws IOException{
+    public void handleLogin(ActionEvent event) throws IOException, InterruptedException{
     	System.out.println("User Try to prompt log in.");
     	String tempUser1 = userName_Login.getText();
     	String identifySign=tempUser.validate(tempUser1);
     	if(identifySign.equals("true")){
-    		userName=tempUser1;
-    		this.changeView("../view/Manage.fxml");
+    		feedback_Login.setText("Login Successful!");
+    		currentUser = tempUser.matchUser(tempUser1);
+        	Thread.sleep(100);
+    		this.changeView("../view/Main.fxml");
     	}else{
     		feedback_Login.setText(identifySign);
     		userName_Login.clear();
