@@ -6,6 +6,14 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * Class Main is the main class that start the app.
+ * 
+ * @author Biao Tian (fcy416)
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
+
 public class Main extends Application {
 	//Variables used to define stage
 	public static Stage stage;

@@ -3,9 +3,13 @@ package model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Class User is the class that read user file, contain User login username and last login time.
@@ -69,6 +73,25 @@ public class User {
 	    	e.printStackTrace();
 	    }
 	    fileBR.close();
+	}
+	
+	/**
+	 * @throws FileNotFoundException
+	 * This method used two FileOutputStream and PrintWriter to write new info to the file.
+	 */
+	public void save() throws FileNotFoundException
+	{
+		FileOutputStream dataOutUser = new FileOutputStream( "data/users.csv", false );
+		PrintWriter  csvFileWriterUser = new PrintWriter(dataOutUser);
+		for(int i=0;i<loginUser.size();i++)
+		{
+			csvFileWriterUser.println(loginUser.get(i).getUserName() + "," 
+									+ loginUser.get(i).getLoginTime() + "," 
+									+ loginUser.get(i).getGoal()+ ","
+									+ loginUser.get(i).getAchieve()+ ","
+									+loginUser.get(i).getFood());
+		}
+		csvFileWriterUser.close();
 	}
 	
 	//Set and Get methods for userName
@@ -174,14 +197,27 @@ public class User {
 	public void addUser(User tempUser) {
 		loginUser.add(tempUser);
 	}
-
-	/*
+	
+	public void removeUser(User tempUser) {
+		loginUser.remove(tempUser);
+	}
+	
+	public void print() {
+		for(int i=0;i<loginUser.size();i++) {
+			System.out.println(loginUser.get(i).getUserName() + "," 
+					+ loginUser.get(i).getLoginTime() + "," 
+					+ loginUser.get(i).getGoal()+ ","
+					+ loginUser.get(i).getAchieve()+ ","
+					+loginUser.get(i).getFood()+"\n");
+		}
+	}
+	
 	public String toString() {
 		String temp="";
 		for(int i=0;i<loginUser.size();i++) {
 			temp+=loginUser.get(i).getUserName()+"\n";
+			System.out.println(loginUser.get(i).getUserName()+"\n");
 		}
 		return temp;
 	}
-	*/
 }

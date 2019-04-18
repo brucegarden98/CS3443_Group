@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
  */
 
 public class LoginController implements Initializable{
+	//All FXML Variables
 	@FXML
 	private Button signup_Login;
 	@FXML
@@ -32,6 +33,7 @@ public class LoginController implements Initializable{
 	private TextField userName_Login;
 	@FXML
 	private Text feedback_Login;
+	//All other variable needed 
 	User tempUser = new User("","","","","");
 	public static User currentUser;
 	
@@ -48,11 +50,10 @@ public class LoginController implements Initializable{
 	}
 
     /**
-	 * handleIdentity method that handle all user action
+	 * handleLogin method that handle all user action for login Button
      * @throws InterruptedException 
 	 */
     public void handleLogin(ActionEvent event) throws IOException, InterruptedException{
-    	System.out.println("User Try to prompt log in.");
     	String tempUser1 = userName_Login.getText();
     	String identifySign=tempUser.validate(tempUser1);
     	if(identifySign.equals("true")){
@@ -68,7 +69,7 @@ public class LoginController implements Initializable{
     }
     
     /**
-     *handleSignUp method that handle all user action and jump to sign up page.
+     *handleSignUp method that handle all user action for sign up button and jump to sign up page.
   	 */
      public void handleSignup(ActionEvent event){
     	 this.changeView("../view/SignUp.fxml");
